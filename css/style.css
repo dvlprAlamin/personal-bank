@@ -1,0 +1,15 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+.deposit{
+    background-color: slateblue;
+}
+.withdraw{
+    background-color: #F79777;
+}
+.balance{
+    background-color: orange;
+}
+#transaction-area{
+    display: none;
+}
