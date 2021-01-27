@@ -20,7 +20,6 @@ document.getElementById('withdraw-btn').addEventListener('click', function(){
     // Add amount to withdraw
     addAmount('withdraw',newAmount);
     document.getElementById('withdraw-amount').value = '';
-
     const oldBalance = parseFloat(document.getElementById('balance').innerText);
     if(isNaN(newAmount)){
         document.getElementById('balance').innerText = oldBalance;
@@ -29,12 +28,10 @@ document.getElementById('withdraw-btn').addEventListener('click', function(){
     else{
         document.getElementById('balance').innerText = oldBalance - newAmount;
     }
-
     if(newAmount > oldBalance || newAmount <= 0){
         document.getElementById('balance').innerText = oldBalance;
         alert('Enter valid amount');
     }
-    // document.getElementById('balance').innerText = oldBalance - newAmount;
 })
 function addAmount(id, newAmount) {
     const oldAmount = parseFloat(document.getElementById(id).innerText);
@@ -48,18 +45,3 @@ function addAmount(id, newAmount) {
         document.getElementById(id).innerText = oldAmount + newAmount;
     }
 };
-
-// const inputAmount = document.getElementById('withdraw-amount').value;
-// if(inputAmount == ""){
-//     alert('Enter valid amount');
-// }
-// function validateForm(amount) {
-//     const value = document.getElementById(amount).value;
-//     if (isNaN(value) || value == 0) {
-//     //   alert("Enter valid amount");
-
-//     }
-//     else{
-//         document.getElementById('balance').innerText = 500;
-//     }
-// }
