@@ -3,45 +3,35 @@ document.getElementById('login-btn').addEventListener('click', function(){
     document.getElementById('login-area').style.display = "none";
     document.getElementById('transaction-area').style.display = "block";
 });
-// Deposit button event handler
-document.getElementById('deposit-btn').addEventListener('click', function(){
-    const newAmount = parseFloat(document.getElementById('deposit-amount').value);
-    // Add amount to deposit
-    addAmount('deposit',newAmount);
-    // Add amount to balance
-    addAmount('balance',newAmount);
-    document.getElementById('deposit-amount').value = '';
-    validateForm('deposit-amount');
-});
 
-// Withdraw button event handler
-document.getElementById('withdraw-btn').addEventListener('click', function(){
-    const newAmount = parseFloat(document.getElementById('withdraw-amount').value);
-    // Add amount to withdraw
-    addAmount('withdraw',newAmount);
-    document.getElementById('withdraw-amount').value = '';
-    const oldBalance = parseFloat(document.getElementById('balance').innerText);
-    if(isNaN(newAmount)){
-        document.getElementById('balance').innerText = oldBalance;
-        alert('Enter valid amount');
-    }
-    else{
-        document.getElementById('balance').innerText = oldBalance - newAmount;
-    }
-    if(newAmount > oldBalance || newAmount <= 0){
-        document.getElementById('balance').innerText = oldBalance;
-        alert('Enter valid amount');
-    }
-})
-function addAmount(id, newAmount) {
-    const oldAmount = parseFloat(document.getElementById(id).innerText);
-    document.getElementById(id).innerText = oldAmount + newAmount;
 
-    if(isNaN(newAmount) || newAmount <= 0){
-        document.getElementById(id).innerText = oldAmount;
-        alert('Enter valid amount');
+// input validator function
+function inputValidator(inputType) {
+    let inputAmount = document.getElementById(inputType + '-amount');
+    if(typeof parseFloat(inputAmount.value) != "number" || inputAmount.value <= 0){
+        alert('Enter a valid amount');
+        inputAmount.value = '';
+        return;
     }
-    else{
-        document.getElementById(id).innerText = oldAmount + newAmount;
+}
+
+
+// input button event handler function
+function inputButtonHandler(inputType) {
+    inputValidator(inputType);
+    addAmount(inputType);
+}
+
+
+// add amount function
+function addAmount(inputType) {
+    let newAmount = parseFloat(document.getElementById(inputType + '-amount').value);
+    const oldAmount = parseFloat(document.getElementById(inputType).innerText);
+    document.getElementById(inputType).innerText = oldAmount + newAmount;
+    const Balance = document.getElementById('balance');
+    const currentBalance = parseFloat(Balance.innerText);
+    if(inputType == 'withdraw'){
+        newAmount = newAmount * -1;
     }
-};
+    Balance.innerText = currentBalance + newAmount;
+}
