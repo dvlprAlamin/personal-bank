@@ -6,7 +6,7 @@ document.getElementById('login-btn').addEventListener('click', function(){
 
 
 // input validator function
-function inputValidator(inputType) {
+function inputButtonHandler(inputType) {
     let inputAmount = document.getElementById(inputType + '-amount');
     let newAmount = inputAmount.value;
     if(isNaN(newAmount) || newAmount <= 0){
@@ -20,12 +20,6 @@ function inputValidator(inputType) {
         addAmount(inputType);
         inputAmount.value = '';    
     }
-}
-
-
-// input button event handler function
-function inputButtonHandler(inputType) {
-    inputValidator(inputType);
 }
 
 
