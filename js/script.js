@@ -8,10 +8,17 @@ document.getElementById('login-btn').addEventListener('click', function(){
 // input validator function
 function inputValidator(inputType) {
     let inputAmount = document.getElementById(inputType + '-amount');
-    if(typeof parseFloat(inputAmount.value) != "number" || inputAmount.value <= 0){
-        alert('Enter a valid amount');
+    let newAmount = inputAmount.value;
+    if(isNaN(newAmount) || newAmount <= 0){
+        document.getElementById('warningAlert').style.display = "inline-block";
+        setTimeout(() => {
+            document.getElementById('warningAlert').style.display = "none" 
+        }, 2000);
         inputAmount.value = '';
-        return;
+    }
+    else{
+        addAmount(inputType);
+        inputAmount.value = '';    
     }
 }
 
@@ -19,7 +26,6 @@ function inputValidator(inputType) {
 // input button event handler function
 function inputButtonHandler(inputType) {
     inputValidator(inputType);
-    addAmount(inputType);
 }
 
 
