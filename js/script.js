@@ -36,14 +36,3 @@ function addAmount(inputType) {
     }
     Balance.innerText = currentBalance + newAmount;
 }
-
-// Enter key event handler
-document.querySelectorAll('input').forEach(item => {
-    item.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            document.getElementById("withdraw-btn").click();
-            document.getElementById("deposit-btn").click();
-        }
-    });
-});
