@@ -9,7 +9,9 @@ document.getElementById('login-btn').addEventListener('click', function(){
 function inputButtonHandler(inputType) {
     let inputAmount = document.getElementById(inputType + '-amount');
     let newAmount = inputAmount.value;
-    if(isNaN(newAmount) || newAmount <= 0){
+    const Balance = document.getElementById('balance');
+    const currentBalance = parseFloat(Balance.innerText);
+    if(isNaN(newAmount) || newAmount <= 0 || newAmount > currentBalance){
         document.getElementById('warningAlert').style.display = "inline-block";
         setTimeout(() => {
             document.getElementById('warningAlert').style.display = "none" 
@@ -22,7 +24,6 @@ function inputButtonHandler(inputType) {
     }
 }
 
-
 // add amount function
 function addAmount(inputType) {
     let newAmount = parseFloat(document.getElementById(inputType + '-amount').value);
@@ -30,8 +31,19 @@ function addAmount(inputType) {
     document.getElementById(inputType).innerText = oldAmount + newAmount;
     const Balance = document.getElementById('balance');
     const currentBalance = parseFloat(Balance.innerText);
-    if(inputType == 'withdraw'){
+    if(inputType === 'withdraw'){
         newAmount = newAmount * -1;
     }
     Balance.innerText = currentBalance + newAmount;
 }
+
+// Enter key event handler
+document.querySelectorAll('input').forEach(item => {
+    item.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("withdraw-btn").click();
+            document.getElementById("deposit-btn").click();
+        }
+    });
+});
